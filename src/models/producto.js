@@ -32,3 +32,4 @@ const productoSchema = new Schema({
 
 export const Producto = mongoose.model('producto',productoSchema);
 
+export default Producto;
