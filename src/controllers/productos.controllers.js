@@ -9,12 +9,21 @@ export const listarProductos = (req, res) =>{
     }
 }
 
-export const crearProducto = (req, res) =>{
+export const crearProducto = async (req, res) =>{
     try {
-        console.log(req)
+        //ir a la base de datos y pedir los productos
+        // aqui los datos deberian estar validados
         console.log(req.body)
-        res.send('producto creado')
+        const productoNuevo = new Producto(req.body);
+        //guardar info en base de datos
+        await productoNuevo.save();
+                res.status(201).json({
+            mensaje: "El producto fue creaco correctamente"
+        })
     } catch (error) {
-        console.log(error)        
+        console.log(error)
+        res.status(400).json({
+            mensaje: "El producto no pudo ser creado"
+        })     
     }
 }
